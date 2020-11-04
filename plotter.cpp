@@ -11,7 +11,7 @@
 
 Plotter::Plotter(QWidget *parent) : QWidget(parent)
 {
-    startTimer(100);
+    startTimer(1000);
 
 }
 
