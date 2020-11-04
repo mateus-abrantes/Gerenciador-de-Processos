@@ -22,6 +22,7 @@ public slots:
     void parar_processo();
     void continuar_processo();
     void alterar_core();
+    void alterar_prioridade();
 private:
     Ui::MainWindow *ui;
     QString filter;

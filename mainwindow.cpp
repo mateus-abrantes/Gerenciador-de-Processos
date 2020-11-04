@@ -22,9 +22,15 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     //lista o numero de de CPU`S
     long number_of_processors = sysconf(_SC_NPROCESSORS_ONLN);
+    //Adiciona as opcoes de cores de CPU
     for(int i=0;i<number_of_processors;i++){
         ui->comboBox_CPU->addItem(QString::number(i));
     }
+    //Adiciona as opcoes de NICE para prioridade
+    for(int i=-20;i<=19;i++){
+        ui->comboBox_PRIORIDADE->addItem(QString::number(i));
+    }
+
     //Inicia o temporizador em 100 ms
     startTimer(100);
 
@@ -39,6 +45,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->pushButton_CONTINUAR,SIGNAL(clicked(bool)),this,SLOT(continuar_processo()));
     //Alterar core a ser executado o processo
     connect(ui->pushButton_ALTERAR_CPU,SIGNAL(clicked(bool)),this,SLOT(alterar_core()));
+    //Alterar o NICE do processo
+    connect(ui->pushButton_ALTERAR_PRIORIDADE,SIGNAL(clicked(bool)),this,SLOT(alterar_prioridade()));
 
     setWindowTitle("Gerenciador de Processos");
 }
@@ -148,6 +156,28 @@ void MainWindow::alterar_core()
     }
 }
 
+void MainWindow::alterar_prioridade()
+{
+    int nice_val,pid_val;
+    QString valor_selecionado,valor_pid;
+    valor_selecionado = ui->comboBox_PRIORIDADE->currentText();
+    nice_val = valor_selecionado.toInt();
+    valor_pid = ui->lineEdit_PID->text();
+    if(QString::compare(valor_pid,"") == 0){
+        QMessageBox::information(0, "Erro","Nenhum PID foi digitado");
+    }else{
+        bool number;
+        int dec = valor_pid.toInt(&number, 10);
+        if(number == false){
+            QMessageBox::information(0, "Erro","O PID tem que ser numerico");
+        }else{
+            pid_val = valor_pid.toInt();
+            setpriority(PRIO_PROCESS, pid_val, nice_val);
+            QMessageBox::information(0, "Alerta","O processo de PID:"+valor_pid+" foi alterado para o NICE de "+valor_selecionado+" !");
+        }
+    }
+}
+
 void MainWindow::lista_processos(QString _filter)
 {
     //    qDebug() << _filter;
@@ -157,6 +187,8 @@ void MainWindow::lista_processos(QString _filter)
     }else{
         std::string filt = _filter.toStdString();
         system(("ps -ao pid,user,pri,stat,nice,psr,pcpu,pmem,time,comm -U $USER --sort=-pcpu | grep  '" + filt + "' > processos.txt").c_str());
+        QString titulo = "    PID USER     PRI STAT  NI PSR %CPU %MEM     TIME COMMAND";
+        ui->listWidget_processos->addItem(titulo);
     }
     QFile file("processos.txt");
     if(!file.open(QIODevice::ReadOnly)) {

@@ -11,7 +11,7 @@
 
 Plotter::Plotter(QWidget *parent) : QWidget(parent)
 {
-    startTimer(1000);
+    startTimer(100);
 
 }
 
@@ -37,7 +37,7 @@ void Plotter::paintEvent(QPaintEvent *event)
     long number_of_processors = sysconf(_SC_NPROCESSORS_ONLN);
 
     //Percentage use cpu
-    system("ps -e -o pcpu,psr,pid > core_processos.txt");
+    system("ps axo pcpu,psr,pid > core_processos.txt");
     float acumulate[number_of_processors];
     //Inicializa o array das percetagens de uso da cpu em 0
     for(int i = 0; i< number_of_processors;i++){
@@ -53,10 +53,10 @@ void Plotter::paintEvent(QPaintEvent *event)
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(" ");
-        fields.removeDuplicates();
+        fields.removeAll(QString(""));
         for(int i = 0; i< number_of_processors;i++){
-            if(QString::compare(fields[2],QString::number(i)) == 0){
-                acumulate[i] += fields[1].toFloat();
+            if(QString::compare(fields[1],QString::number(i)) == 0){
+                acumulate[i] += fields[0].toFloat();
             }
         }
     }
@@ -83,7 +83,7 @@ void Plotter::paintEvent(QPaintEvent *event)
             brush.setColor(QColor(0,255,0));
         }else if((int)acumulate[i-1]> 30 && (int)acumulate[i-1] <=70){
             brush.setColor(QColor(0,0,255));
-        }else if((int)acumulate[i-1]> 70 && (int)acumulate[i-1] <=100){
+        }else if((int)acumulate[i-1]> 70){
             brush.setColor(QColor(255,0,0));
         }
         painter.setBrush(brush);
