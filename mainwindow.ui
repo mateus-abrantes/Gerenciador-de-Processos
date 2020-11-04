@@ -17,28 +17,180 @@
    <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_3">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2" stretch="30,70">
+     <layout class="QVBoxLayout" name="verticalLayout_4" stretch="30,70">
       <item>
-       <widget class="QWidget" name="widget" native="true"/>
+       <widget class="Plotter" name="widget" native="true"/>
       </item>
       <item>
-       <layout class="QVBoxLayout" name="verticalLayout" stretch="5,95">
-        <property name="spacing">
-         <number>2</number>
-        </property>
+       <layout class="QVBoxLayout" name="verticalLayout_3" stretch="30,70">
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0">
+         <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
-           <widget class="QLabel" name="label">
-            <property name="text">
-             <string>PESQUISAR</string>
-            </property>
-           </widget>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label_FILTER">
+              <property name="font">
+               <font>
+                <family>Ubuntu Mono</family>
+                <weight>75</weight>
+                <bold>true</bold>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true"/>
+              </property>
+              <property name="text">
+               <string>PESQUISAR</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEdit_filter"/>
+            </item>
+           </layout>
           </item>
           <item>
-           <widget class="QLineEdit" name="lineEdit_filter"/>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_2">
+                <item>
+                 <widget class="QLabel" name="label_PID">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>PID</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="lineEdit_PID"/>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_3">
+                <item>
+                 <widget class="QPushButton" name="pushButton_MATAR">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>MATAR</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_SUSPENDER">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>SUSPENDER</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_CONTINUAR">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>CONTINUAR</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout">
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_5">
+                <item>
+                 <widget class="QLabel" name="label">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>CPU:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox_CPU"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_ALTERAR_CPU">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                    <weight>50</weight>
+                    <bold>false</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ALTERAR CPU</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item>
+               <layout class="QHBoxLayout" name="horizontalLayout_6">
+                <item>
+                 <widget class="QLabel" name="label_PRIORIDADE">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                    <weight>75</weight>
+                    <bold>true</bold>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>PRIORIDADE</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="comboBox_PRIORIDADE"/>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="pushButton_ALTERAR_PRIORIDADE">
+                  <property name="font">
+                   <font>
+                    <family>Ubuntu Mono</family>
+                   </font>
+                  </property>
+                  <property name="text">
+                   <string>ALTERAR PRIORIDADE</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -46,8 +198,12 @@
          <widget class="QListWidget" name="listWidget_processos">
           <property name="font">
            <font>
-            <family>Courier New</family>
+            <family>Ubuntu Mono</family>
+            <pointsize>15</pointsize>
            </font>
+          </property>
+          <property name="cursor" stdset="0">
+           <cursorShape>ArrowCursor</cursorShape>
           </property>
           <property name="acceptDrops">
            <bool>true</bool>
@@ -73,6 +229,9 @@
           <property name="layoutMode">
            <enum>QListView::SinglePass</enum>
           </property>
+          <property name="uniformItemSizes">
+           <bool>false</bool>
+          </property>
          </widget>
         </item>
        </layout>
@@ -93,6 +252,14 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Plotter</class>
+   <extends>QWidget</extends>
+   <header location="global">plotter.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

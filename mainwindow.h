@@ -16,7 +16,12 @@ public:
     void timerEvent(QTimerEvent *event);
 public slots:
     void lista_processos(QString _filter);
+    void get_pid_item_list_process();
     void set_filter();
+    void matar_processo();
+    void parar_processo();
+    void continuar_processo();
+    void alterar_core();
 private:
     Ui::MainWindow *ui;
     QString filter;
